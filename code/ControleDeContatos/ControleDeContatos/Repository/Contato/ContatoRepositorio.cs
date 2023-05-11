@@ -26,5 +26,25 @@ namespace ControleDeContatos.Repository.Contato
             return contato;
         }
 
+        public async Task<ContatoModel> ListaPorId(int id)
+        {
+            return await _banco.Contato.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<ContatoModel> Alterar(ContatoModel contato)
+        {
+            var contatoDB = await ListaPorId(contato.Id);
+
+            if (contatoDB == null) throw new System.Exception("Houve um erro na atualização do contato!");
+
+            contatoDB.Nome = contato.Nome;
+            contatoDB.Email = contato.Email;
+            contatoDB.Celular = contato.Celular;
+
+            _banco.Contato.Update(contatoDB);
+            _banco.SaveChanges();
+
+            return contatoDB;
+        }
     }
 }

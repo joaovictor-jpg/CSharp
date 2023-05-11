@@ -7,6 +7,10 @@ namespace ControleDeContatos.Repository.Contato
 
         Task<List<ContatoModel>> ListarContato();
 
+        Task<ContatoModel> ListaPorId(int id);
+
         Task<ContatoModel> Adcionar(ContatoModel contato);
+
+        Task<ContatoModel> Alterar(ContatoModel contato);
     }
 }

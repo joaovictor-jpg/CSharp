@@ -30,12 +30,21 @@ namespace ControleDeContatos.Controllers
         public async Task<IActionResult> Criar(ContatoModel contatoModel)
         {
             await _repositorio.Adcionar(contatoModel);
-
             return RedirectToAction("Index");
+
         }
 
-        public IActionResult Editar() {
-            return View();
+        public async Task<IActionResult> Editar(int id)
+        {
+            var contato = await _repositorio.ListaPorId(id);
+            return View(contato);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Alterar(ContatoModel contato)
+        {
+            var contatoModel = await _repositorio.Alterar(contato);
+            return RedirectToAction("Index");
         }
 
         public IActionResult ApagarConfirmacao() {
