@@ -47,8 +47,15 @@ namespace ControleDeContatos.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult ApagarConfirmacao() {
-            return View();
+        public async Task<IActionResult> ApagarConfirmacao(int id) {
+            var contato = await _repositorio.ListaPorId(id);
+            return View(contato);
+        }
+
+        public async Task<IActionResult> Apagar(int id)
+        {
+            await _repositorio.Apagar(id);
+            return RedirectToAction("Index");
         }
     }
 }

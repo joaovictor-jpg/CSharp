@@ -12,5 +12,7 @@ namespace ControleDeContatos.Repository.Contato
         Task<ContatoModel> Adcionar(ContatoModel contato);
 
         Task<ContatoModel> Alterar(ContatoModel contato);
+
+        Task<bool> Apagar(int id);
     }
 }
