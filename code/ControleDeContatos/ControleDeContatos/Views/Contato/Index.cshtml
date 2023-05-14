@@ -9,6 +9,26 @@
         <a class="btn btn-outline-primary" role="button" asp-controller="Contato" asp-action="Criar">NOVO</a>
     </div>
 
+    @if(TempData["MessagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+          <button type="button" class="btn btn-outline-danger bt-sm close-alert" arial-lable="Close">X</button>
+          @TempData["MessagemSucesso"];
+        </div>
+    } 
+    @if(TempData["MessagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+           <button type="button" class="btn btn-outline-danger bt-sm close-alert" arial-lable="Close">X</button>
+           @TempData["MessagemErro"];
+        </div>        
+    }
+
+
+    <br />
+
+
+
     <h1 class ="display-4">@ViewData["Title"]</h1>
 
     <table class="table">

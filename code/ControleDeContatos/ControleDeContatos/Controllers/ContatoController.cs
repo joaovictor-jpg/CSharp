@@ -29,8 +29,21 @@ namespace ControleDeContatos.Controllers
         [HttpPost]
         public async Task<IActionResult> Criar(ContatoModel contatoModel)
         {
-            await _repositorio.Adcionar(contatoModel);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _repositorio.Adcionar(contatoModel);
+                    TempData["MessagemSucesso"] = "Contato salvo com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View(contatoModel);
+            }
+            catch(Exception erro)
+            {
+                TempData["MessagemErro"] = $"Ops, não conseguimos cadastrar seu contato, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
 
         }
 
@@ -43,8 +56,21 @@ namespace ControleDeContatos.Controllers
         [HttpPost]
         public async Task<IActionResult> Alterar(ContatoModel contato)
         {
-            var contatoModel = await _repositorio.Alterar(contato);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var contatoModel = await _repositorio.Alterar(contato);
+                    TempData["MessagemSucesso"] = "Contato atualizado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View("Editar", contato);
+            }
+            catch (Exception erro)
+            {
+                TempData["MessagemErro"] = $"Ops, não conseguimos atualizar seu contato, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         public async Task<IActionResult> ApagarConfirmacao(int id) {
@@ -54,8 +80,24 @@ namespace ControleDeContatos.Controllers
 
         public async Task<IActionResult> Apagar(int id)
         {
-            await _repositorio.Apagar(id);
-            return RedirectToAction("Index");
+            try
+            {
+                bool apagado = await _repositorio.Apagar(id);
+                if (apagado)
+                {
+                    TempData["MessagemSucesso"] = "Contato apagado com sucesso!";
+                }
+                else
+                {
+                    TempData["MessagemErro"] = "Ops, não conseguimos apagar seu contato!";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception erro)
+            {
+                TempData["MessagemErro"] = $"Ops, não conseguimos apagar seu contato, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
