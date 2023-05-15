@@ -1,6 +1,7 @@
 ﻿using ControleDeContatos.Models;
 using ControleDeContatos.Repository.Usuario;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ControleDeContatos.Controllers
 {
@@ -62,6 +63,43 @@ namespace ControleDeContatos.Controllers
             catch (Exception ex)
             {
                 TempData["MessagemErro"] = $"Ops, não conseguimos apagar seu usuario, tente novamente, detalhe do erro: {ex.Message}";
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<IActionResult> Editar(int id)
+        {
+            var usuario = await _usuarioRepositorio.ListaPorId(id);
+            return View(usuario);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(UsuarioDTO usuarioDTO)
+        {
+            try
+            {
+                UsuarioModel usuario = null;
+                if(ModelState.IsValid)
+                {
+
+                    usuario = new UsuarioModel()
+                    {
+                        Id = usuarioDTO.Id,
+                        Nome = usuarioDTO.Nome,
+                        Login = usuarioDTO.Login,
+                        Email = usuarioDTO.Email,
+                        Perfil = (Models.Enum.PerfilEnum)usuarioDTO.Perfil
+                    };
+
+                    usuario = await _usuarioRepositorio.Alterar(usuario);
+                    TempData["MessagemSucesso"] = "Usuario atualizado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View(usuario);
+            }
+            catch(Exception erro)
+            {
+                TempData["MessagemErro"] = $"Ops, não conseguimos atualizar contato seu usuário, tente novamente, detalhe do erro {erro.Message}";
                 return RedirectToAction("Index");
             }
         }

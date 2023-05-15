@@ -9,9 +9,9 @@ namespace ControleDeContatos.Repository.Usuario
 
         Task<UsuarioModel> ListaPorId(int id);
 
-        Task<UsuarioModel> Adcionar(UsuarioModel contato);
+        Task<UsuarioModel> Adcionar(UsuarioModel usuario);
 
-        Task<UsuarioModel> Alterar(UsuarioModel contato);
+        Task<UsuarioModel> Alterar(UsuarioModel usuario);
 
         Task<bool> Apagar(int id);
     }
