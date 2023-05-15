@@ -44,5 +44,26 @@ namespace ControleDeContatos.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public async Task<IActionResult> ApagarConfirmacao(int id)
+        {
+            var usuario = await _usuarioRepositorio.ListaPorId(id);
+            return View(usuario);
+        }
+
+        public async Task<IActionResult> Apagar(int id)
+        {
+            try
+            {
+                bool apagado = await _usuarioRepositorio.Apagar(id);
+                if (apagado) TempData["MessagemSucesso"] = "Usuario apagado com sucesso!"; else TempData["MessagemErro"] = "Ops, não conseguimos apagar Usuario";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["MessagemErro"] = $"Ops, não conseguimos apagar seu usuario, tente novamente, detalhe do erro: {ex.Message}";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
