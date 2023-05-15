@@ -32,6 +32,11 @@ namespace ControleDeContatos.Repository.Usuario
             return await _banco.Usuario.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<UsuarioModel> BuscarPorLogin(string login)
+        {
+            return await _banco.Usuario.FirstOrDefaultAsync(x => x.Login == login);
+        }
+
         public async Task<UsuarioModel> Alterar(UsuarioModel usuario)
         {
             var usuarioDB = await ListaPorId(usuario.Id);

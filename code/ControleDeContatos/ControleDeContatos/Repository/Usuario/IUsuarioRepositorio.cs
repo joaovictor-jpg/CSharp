@@ -9,6 +9,8 @@ namespace ControleDeContatos.Repository.Usuario
 
         Task<UsuarioModel> ListaPorId(int id);
 
+        Task<UsuarioModel> BuscarPorLogin(String login);
+
         Task<UsuarioModel> Adcionar(UsuarioModel usuario);
 
         Task<UsuarioModel> Alterar(UsuarioModel usuario);

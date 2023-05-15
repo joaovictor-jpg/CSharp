@@ -19,5 +19,11 @@ namespace ControleDeContatos.Models
         public DateTime? DataAtualizacao { get; set; }
         [Required(ErrorMessage = "Informe o perfil do usuário")]
         public PerfilEnum Perfil { get; set; }
+
+        public bool SenhaValida(String senha)
+        {
+            return Senha == senha;
+        }
     }
 }
+ 
