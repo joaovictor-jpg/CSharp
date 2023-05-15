@@ -1,5 +1,6 @@
 using ControleDeContatos.Data;
 using ControleDeContatos.Repository.Contato;
+using ControleDeContatos.Repository.Usuario;
 using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeContatos
@@ -18,6 +19,7 @@ namespace ControleDeContatos
                 ));
 
             builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             var app = builder.Build();
 
