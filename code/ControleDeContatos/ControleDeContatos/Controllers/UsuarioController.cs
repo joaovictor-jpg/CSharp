@@ -1,10 +1,12 @@
-﻿using ControleDeContatos.Models;
+﻿using ControleDeContatos.Filters;
+using ControleDeContatos.Models;
 using ControleDeContatos.Repository.Usuario;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ControleDeContatos.Controllers
 {
+    [PaginaRestritaSomenteAdimin]
     public class UsuarioController : Controller
     {
 
