@@ -21,6 +21,7 @@ namespace ControleDeContatos.Repository.Usuario
         public async Task<UsuarioModel> Adcionar(UsuarioModel usuario)
         {
             usuario.DataCadastro = DateTime.Now;
+            usuario.SetSenhaHash();
             await _banco.Usuario.AddAsync(usuario);
             await _banco.SaveChangesAsync();
 

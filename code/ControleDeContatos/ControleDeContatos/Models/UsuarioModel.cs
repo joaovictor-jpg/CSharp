@@ -1,4 +1,5 @@
-﻿using ControleDeContatos.Models.Enum;
+﻿using ControleDeContatos.Helper;
+using ControleDeContatos.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeContatos.Models
@@ -22,7 +23,12 @@ namespace ControleDeContatos.Models
 
         public bool SenhaValida(String senha)
         {
-            return Senha == senha;
+            return Senha == senha.GerarHash();
+        }
+
+        public void SetSenhaHash()
+        {
+            Senha = Senha.GerarHash();
         }
     }
 }
