@@ -38,6 +38,11 @@ namespace ControleDeContatos.Repository.Usuario
             return await _banco.Usuario.FirstOrDefaultAsync(x => x.Login == login);
         }
 
+        public async Task<UsuarioModel> BuscarPorEmailELogin(string email, string login)
+        {
+            return await _banco.Usuario.FirstOrDefaultAsync(x => x.Email == email && x.Login == login);
+        }
+
         public async Task<UsuarioModel> Alterar(UsuarioModel usuario)
         {
             var usuarioDB = await ListaPorId(usuario.Id);

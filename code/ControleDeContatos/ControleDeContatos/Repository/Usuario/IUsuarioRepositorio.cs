@@ -11,6 +11,8 @@ namespace ControleDeContatos.Repository.Usuario
 
         Task<UsuarioModel> BuscarPorLogin(String login);
 
+        Task<UsuarioModel> BuscarPorEmailELogin(String email, String login);
+
         Task<UsuarioModel> Adcionar(UsuarioModel usuario);
 
         Task<UsuarioModel> Alterar(UsuarioModel usuario);
