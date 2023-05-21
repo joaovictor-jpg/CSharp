@@ -15,7 +15,9 @@ namespace ControleDeContatos.Repository.Usuario
 
         public async Task<List<UsuarioModel>> ListarContato()
         {
-            return await _banco.Usuario.ToListAsync();
+            return await _banco.Usuario
+                .Include(x => x.Contatos)
+                .ToListAsync();
         }
 
         public async Task<UsuarioModel> Adcionar(UsuarioModel usuario)

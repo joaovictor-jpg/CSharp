@@ -1,5 +1,6 @@
 ﻿using ControleDeContatos.Filters;
 using ControleDeContatos.Models;
+using ControleDeContatos.Repository.Contato;
 using ControleDeContatos.Repository.Usuario;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,9 +13,12 @@ namespace ControleDeContatos.Controllers
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
+        private readonly IContatoRepositorio _contatoRepositorio;
+
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IContatoRepositorio contatoRepositorio)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _contatoRepositorio = contatoRepositorio;
         }
 
         public async Task<IActionResult> Index()
@@ -104,6 +108,12 @@ namespace ControleDeContatos.Controllers
                 TempData["MessagemErro"] = $"Ops, não conseguimos atualizar contato seu usuário, tente novamente, detalhe do erro {erro.Message}";
                 return RedirectToAction("Index");
             }
+        }
+
+        public async Task<IActionResult> ListarContatosPorUsuarioId(int id)
+        {
+            List<ContatoModel> contatos = await _contatoRepositorio.ListarContato(id);
+            return PartialView("_ContatosUsuario", contatos);
         }
     }
 }
