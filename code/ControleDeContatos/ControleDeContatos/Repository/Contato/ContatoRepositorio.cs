@@ -13,9 +13,9 @@ namespace ControleDeContatos.Repository.Contato
             _banco = banco;
         }
 
-        public async Task<List<ContatoModel>> ListarContato()
+        public async Task<List<ContatoModel>> ListarContato(int usuarioId)
         {
-            return await _banco.Contato.ToListAsync();
+            return await _banco.Contato.Where(x => x.UsuarioId == usuarioId).ToListAsync();
         }
 
         public async Task<ContatoModel> Adcionar(ContatoModel contato)

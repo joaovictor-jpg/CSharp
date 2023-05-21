@@ -5,7 +5,7 @@ namespace ControleDeContatos.Repository.Contato
     public interface IContatoRepositorio
     {
 
-        Task<List<ContatoModel>> ListarContato();
+        Task<List<ContatoModel>> ListarContato(int usuarioId);
 
         Task<ContatoModel> ListaPorId(int id);
 

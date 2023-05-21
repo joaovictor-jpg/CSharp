@@ -21,6 +21,8 @@ namespace ControleDeContatos.Models
         [Required(ErrorMessage = "Informe o perfil do usuário")]
         public PerfilEnum Perfil { get; set; }
 
+        public virtual List<ContatoModel> Contatos { get; set; }
+
         public bool SenhaValida(String senha)
         {
             return Senha == senha.GerarHash();
