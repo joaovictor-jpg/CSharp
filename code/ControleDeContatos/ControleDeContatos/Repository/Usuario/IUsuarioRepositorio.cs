@@ -17,6 +17,8 @@ namespace ControleDeContatos.Repository.Usuario
 
         Task<UsuarioModel> Alterar(UsuarioModel usuario);
 
+        Task<UsuarioModel> AlterarSenha(AlterarSenhaModel alterarSenha);
+
         Task<bool> Apagar(int id);
     }
 }

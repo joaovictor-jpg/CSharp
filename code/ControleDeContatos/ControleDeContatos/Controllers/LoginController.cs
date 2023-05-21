@@ -87,7 +87,8 @@ namespace ControleDeContatos.Controllers
                         bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de contatos - Nova Senha", mensagem);
                         if(emailEnviado)
                         {
-                            _usuarioRepositorio.Alterar(usuario);
+                            
+                            await _usuarioRepositorio.Alterar(usuario);
                             TempData["MessagemSucesso"] = "Enviamos para seu e-mail cadastrado uma nova senha.";
                         }
                         else
