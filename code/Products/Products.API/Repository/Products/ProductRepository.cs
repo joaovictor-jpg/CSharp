@@ -13,6 +13,15 @@ namespace Products.API.Repository.Products
             _productsContext = productsContext;
         }
 
+        public async Task<Product> Save(Product product)
+        {
+            await _productsContext.Products.AddAsync(product);
+
+            await _productsContext.SaveChangesAsync();
+
+            return product;
+        }
+
         async Task<List<Product>> IProductRepository.GetProducts()
         {
             return await _productsContext.Products.ToListAsync();
