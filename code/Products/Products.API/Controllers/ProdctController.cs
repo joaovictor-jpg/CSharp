@@ -18,6 +18,7 @@ namespace Products.API.Controllers
 
         [HttpGet]
         [Route("/products")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetProduct()
         {
             return Ok(await _productRepository.GetProducts());
@@ -25,7 +26,7 @@ namespace Products.API.Controllers
 
         [HttpPost]
         [Route("/products")]
-        [Authorize]
+        [Authorize(Roles = "Employee,Manager")]
         public async Task<ActionResult> Save(Product product)
         {
             return Created($"Product/products/{product.id}",new
@@ -38,7 +39,7 @@ namespace Products.API.Controllers
 
         [HttpPut]
         [Route("/products")]
-        [Authorize]
+        [Authorize(Roles = "Employee,Manager")]
         public async Task<ActionResult> Update(Product product)
         {
             Product productDb = await _productRepository.GetProductById(product.id);
@@ -60,7 +61,7 @@ namespace Products.API.Controllers
 
         [HttpDelete]
         [Route("/products")]
-        [Authorize]
+        [Authorize(Roles = "Manager")]
         public async Task<ActionResult> Delete(int id)
         {
             Product productDb = await _productRepository.GetProductById(id);
