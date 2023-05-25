@@ -8,6 +8,7 @@ namespace Products.API.Data
         public ProductsContext(DbContextOptions<ProductsContext> options) : base(options) {}
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Products.API.Data;
 using Products.API.Repository.Products;
+using Products.API.Repository.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 //Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Connection with database
 builder.Services.AddDbContext<ProductsContext>(x => x.UseMySql(

@@ -2,7 +2,7 @@
 {
     public enum ProductCategory
     {
-        Foog = 0,
+        Food = 0,
         Convenience = 1,
         Commodities = 2,
         Durables = 3,
