@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Products.API.Config;
 using Products.API.Models;
+using Products.API.Models.DTO;
 using Products.API.Repository.Users;
 
 namespace Products.API.Controllers
@@ -33,6 +34,33 @@ namespace Products.API.Controllers
                 },
                 token = token
             });
+        }
+
+        [HttpPost]
+        [Route("/login")]
+        public async Task<IActionResult> Login(LoginDTO login)
+        {
+            var user = await _repository.Login(login);
+
+            if (user == null) return Unauthorized();
+
+            if(user.PasswordIsValida(login.Password))
+            {
+                var token = GenerateToken.Token(user);
+
+                return Ok(new
+                {
+                    user = new
+                    {
+                        name = user.Name,
+                        email = user.Email
+                    },
+                    token = token
+                });
+            }
+
+            return Unauthorized();
+
         }
     }
 }

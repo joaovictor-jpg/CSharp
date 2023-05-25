@@ -15,5 +15,11 @@ namespace Products.API.Models
         {
             Password = Password.GenerateHast();
         }
+
+        public bool PasswordIsValida(String password)
+        {
+            return Password == password.GenerateHast();
+        }
+
     }
 }

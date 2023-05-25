@@ -1,5 +1,7 @@
-﻿using Products.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Products.API.Data;
 using Products.API.Models;
+using Products.API.Models.DTO;
 
 namespace Products.API.Repository.Users
 {
@@ -10,6 +12,11 @@ namespace Products.API.Repository.Users
         public UserRepository(ProductsContext context)
         {
             _context = context;
+        }
+
+        public async Task<UserModel> Login(LoginDTO login)
+        {
+             return await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email);
         }
 
         public async Task<UserModel> Save(UserModel user)

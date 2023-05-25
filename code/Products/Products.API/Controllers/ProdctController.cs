@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Products.API.Models;
 using Products.API.Repository.Products;
 
@@ -24,6 +25,7 @@ namespace Products.API.Controllers
 
         [HttpPost]
         [Route("/products")]
+        [Authorize]
         public async Task<ActionResult> Save(Product product)
         {
             return Created($"Product/products/{product.id}",new
@@ -36,6 +38,7 @@ namespace Products.API.Controllers
 
         [HttpPut]
         [Route("/products")]
+        [Authorize]
         public async Task<ActionResult> Update(Product product)
         {
             Product productDb = await _productRepository.GetProductById(product.id);
@@ -57,6 +60,7 @@ namespace Products.API.Controllers
 
         [HttpDelete]
         [Route("/products")]
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             Product productDb = await _productRepository.GetProductById(id);
