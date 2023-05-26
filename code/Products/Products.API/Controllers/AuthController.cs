@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Products.API.Config;
 using Products.API.Models;
 using Products.API.Models.DTO;
@@ -47,6 +48,9 @@ namespace Products.API.Controllers
             if(user.PasswordIsValida(login.Password))
             {
                 var token = GenerateToken.Token(user);
+                var refreshToken = GenerateToken.TokenRefresh();
+                GenerateToken.SaveRefrashToken(user.Name, refreshToken);
+
 
                 return Ok(new
                 {
@@ -55,12 +59,34 @@ namespace Products.API.Controllers
                         name = user.Name,
                         email = user.Email
                     },
-                    token = token
+                    token = token,
+                    refrashToken = refreshToken
                 });
             }
 
             return Unauthorized();
 
+        }
+
+        [HttpPost]
+        [Route("/refresh")]
+        public async Task<IActionResult> Refrash(string token, string refreshToken)
+        {
+            var principal = GenerateToken.GetPrincipalFromExpiredToken(token);
+            var user = principal.Identity.Name;
+            var savedRefrashToken = GenerateToken.GetRefreshToken(user);
+            if (savedRefrashToken != refreshToken) throw new SecurityTokenException("Invalid Refresh");
+
+            var newjwtToken = GenerateToken.Token(principal.Claims);
+            var newRefreshToken = GenerateToken.TokenRefresh();
+            GenerateToken.DeleteRefreshToken(user, refreshToken);
+            GenerateToken.SaveRefrashToken(user, newRefreshToken);
+
+            return Ok(new
+            {
+                token = newjwtToken,
+                refreshToken = newRefreshToken
+            });
         }
     }
 }
