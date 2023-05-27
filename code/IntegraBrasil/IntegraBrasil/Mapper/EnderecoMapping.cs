@@ -4,13 +4,13 @@ using IntegraBrasil.Model;
 
 namespace IntegraBrasil.Mapper
 {
-    public class EnderecoMapping : Profile
+    public class EnderecoMapping :Profile
     {
         public EnderecoMapping()
         {
             CreateMap(typeof(ResponseGenerico<>), typeof(ResponseGenerico<>));
             CreateMap<EnderecoResponse, EnderecoModel>();
-            CreateMap<EnderecoModel, EnderecoModel>();
+            CreateMap<EnderecoModel, EnderecoResponse>();
         }
     }
 }

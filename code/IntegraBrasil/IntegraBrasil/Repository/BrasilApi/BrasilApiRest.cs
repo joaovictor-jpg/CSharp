@@ -21,7 +21,7 @@ namespace IntegraBrasil.Repository.BrasilApi
                 if(responseBrasilApi.IsSuccessStatusCode)
                 {
                     response.CodigoHttp = responseBrasilApi.StatusCode;
-                    response.DadosRetorn = objResponse;
+                    response.DadosRetorno = objResponse;
                 }
                 else
                 {
