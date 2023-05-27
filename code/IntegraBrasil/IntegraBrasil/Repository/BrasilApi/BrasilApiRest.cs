@@ -1,6 +1,7 @@
 ﻿using IntegraBrasil.DTOs;
 using IntegraBrasil.Model;
 using System.Dynamic;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 
 namespace IntegraBrasil.Repository.BrasilApi
@@ -28,13 +29,32 @@ namespace IntegraBrasil.Repository.BrasilApi
                     response.CodigoHttp = responseBrasilApi.StatusCode;
                     response.ErroRetorno = JsonSerializer.Deserialize<ExpandoObject>(contentResp);
                 }
-
-                return response;
             }
+            return response;
         }
-        public Task<ResponseGenerico<List<BancoModel>>> BuscarTodosOsBancos()
+        public async Task<ResponseGenerico<List<BancoModel>>> BuscarTodosOsBancos()
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://brasilapi.com.br/api#tag/BANKS/banks/v1");
+            var response = new ResponseGenerico<List<BancoModel>>();
+
+            using(var client = new HttpClient())
+            {
+                var responseBrasilApi = await client.SendAsync(request);
+                var contentResp = await responseBrasilApi.Content.ReadAsStringAsync();
+                var objectResponse = JsonSerializer.Deserialize<List<BancoModel>>(contentResp);
+
+                if(responseBrasilApi.IsSuccessStatusCode)
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.DadosRetorno = objectResponse;
+                }
+                else
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.ErroRetorno = JsonSerializer.Deserialize<ExpandoObject>(contentResp);
+                }
+            }
+            return response;
         }
         public Task<ResponseGenerico<BancoModel>> BuscarBancoPorCodigo(string codigo)
         {
