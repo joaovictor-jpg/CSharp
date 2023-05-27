@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IntegraBrasil.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class BancoController : ControllerBase
     {
