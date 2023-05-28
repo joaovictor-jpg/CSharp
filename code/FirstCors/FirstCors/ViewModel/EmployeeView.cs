@@ -8,5 +8,6 @@ namespace FirstCors.ViewModel
         public string Name { get; set; }
         [Required(ErrorMessage = "Age is Mandatory")]
         public int Age { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }
