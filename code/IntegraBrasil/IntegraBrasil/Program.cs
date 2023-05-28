@@ -1,4 +1,6 @@
+using IntegraBrasil.DTOs;
 using IntegraBrasil.Mapper;
+using IntegraBrasil.Repository.Banco;
 using IntegraBrasil.Repository.BrasilApi;
 using IntegraBrasil.Repository.Endereco;
 
@@ -12,9 +14,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEnderecoService, EnderecoService>();
+builder.Services.AddScoped<IBancoService, BancoService>();
 builder.Services.AddScoped<IBrasilApi, BrasilApiRest>();
 
 builder.Services.AddAutoMapper(typeof(EnderecoMapping));
+builder.Services.AddAutoMapper(typeof(BancoMapping));
 
 var app = builder.Build();
 

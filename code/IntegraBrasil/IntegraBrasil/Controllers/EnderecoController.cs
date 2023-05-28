@@ -15,7 +15,7 @@ namespace IntegraBrasil.Controllers
             _endrecoService = enderecoService;
         }
 
-        [HttpGet("/{cep}")]
+        [HttpGet("busca/{cep}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
