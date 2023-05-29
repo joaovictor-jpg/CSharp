@@ -1,10 +1,10 @@
-﻿using FirstCors.Model;
+﻿using FirstCors.Domain.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace FirstCors.Service
+namespace FirstCors.Application.Service
 {
     public class TokenService
     {
@@ -13,7 +13,7 @@ namespace FirstCors.Service
             var key = Encoding.ASCII.GetBytes(Key.Secret);
             var tokenConfig = new SecurityTokenDescriptor
             {
-                Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim("employeeId", employee.Id.ToString()),
                 }),

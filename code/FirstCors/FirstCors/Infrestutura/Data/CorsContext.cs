@@ -1,16 +1,15 @@
-﻿using FirstCors.Data.Map;
-using FirstCors.Model;
+﻿using FirstCors.Domain.Model;
+using FirstCors.Infrestutura.Data.Map;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FirstCors.Data
+namespace FirstCors.Infrestutura.Data
 {
     public class CorsContext : DbContext
     {
 
-        public CorsContext(DbContextOptions<CorsContext> options) : base(options) {}
+        public CorsContext(DbContextOptions<CorsContext> options) : base(options) { }
 
-        public DbSet<EmployeeModel> employee {  get; set; }
+        public DbSet<EmployeeModel> employee { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

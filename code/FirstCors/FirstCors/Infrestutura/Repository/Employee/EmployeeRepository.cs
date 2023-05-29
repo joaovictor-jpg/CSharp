@@ -1,8 +1,9 @@
-﻿using FirstCors.Data;
-using FirstCors.Model;
+﻿using FirstCors.Domain.DTOs;
+using FirstCors.Domain.Model;
+using FirstCors.Infrestutura.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FirstCors.Repository.Employee
+namespace FirstCors.Infrestutura.Repository.Employee
 {
     public class EmployeeRepository : IEmployee
     {
@@ -12,12 +13,18 @@ namespace FirstCors.Repository.Employee
         {
             _corsContext = corsContext;
         }
-        public async Task<List<EmployeeModel>> GeatAllAsync(int pageNumber, int pageQuantity)
+        public async Task<List<EmployeeDTO>> GeatAllAsync(int pageNumber, int pageQuantity)
         {
             return await _corsContext.employee
                 .AsNoTracking()
                 .Skip(pageNumber)
                 .Take(pageQuantity)
+                .Select(e => new EmployeeDTO
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Photo = e.Photo
+                })
                 .ToListAsync();
         }
 

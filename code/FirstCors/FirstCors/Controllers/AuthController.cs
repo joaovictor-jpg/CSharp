@@ -1,6 +1,5 @@
-﻿using FirstCors.Model;
-using FirstCors.Service;
-using Microsoft.AspNetCore.Http;
+﻿using FirstCors.Application.Service;
+using FirstCors.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstCors.Controllers

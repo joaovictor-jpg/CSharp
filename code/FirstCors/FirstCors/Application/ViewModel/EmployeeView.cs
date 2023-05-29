@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FirstCors.ViewModel
+namespace FirstCors.Application.ViewModel
 {
     public class EmployeeView
     {

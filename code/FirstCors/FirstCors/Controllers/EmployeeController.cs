@@ -1,6 +1,6 @@
-﻿using FirstCors.Model;
-using FirstCors.Repository.Employee;
-using FirstCors.ViewModel;
+﻿using FirstCors.Application.ViewModel;
+using FirstCors.Domain.Model;
+using FirstCors.Infrestutura.Repository.Employee;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

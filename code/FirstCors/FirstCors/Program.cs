@@ -1,6 +1,6 @@
 using FirstCors;
-using FirstCors.Data;
-using FirstCors.Repository.Employee;
+using FirstCors.Infrestutura.Data;
+using FirstCors.Infrestutura.Repository.Employee;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

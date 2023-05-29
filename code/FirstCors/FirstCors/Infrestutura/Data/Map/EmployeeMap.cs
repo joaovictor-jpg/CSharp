@@ -1,8 +1,8 @@
-﻿using FirstCors.Model;
+﻿using FirstCors.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FirstCors.Data.Map
+namespace FirstCors.Infrestutura.Data.Map
 {
     public class EmployeeMap : IEntityTypeConfiguration<EmployeeModel>
     {
