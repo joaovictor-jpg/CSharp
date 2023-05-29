@@ -38,6 +38,20 @@ namespace FirstCors.Controllers
             return emplyoee == null ? NotFound() : Ok(emplyoee);
         }
 
+        [HttpGet("/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> SearchAsync([FromRoute] int id)
+        {
+            var employeeDTO = await _employee.GetByIdAsync(id);
+
+            if (employeeDTO == null) return NotFound();
+
+            return Ok(employeeDTO);
+        }
+
         [HttpPost]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]

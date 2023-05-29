@@ -1,4 +1,5 @@
 using FirstCors;
+using FirstCors.Application.Mapping;
 using FirstCors.Infrestutura.Data;
 using FirstCors.Infrestutura.Repository.Employee;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -48,6 +49,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<IEmployee, EmployeeRepository>();
+builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
 
 builder.Services.AddAuthentication(x =>
 {

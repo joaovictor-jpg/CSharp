@@ -7,6 +7,6 @@ namespace FirstCors.Infrestutura.Repository.Employee
     {
         Task<List<EmployeeDTO>> GeatAllAsync(int pageNumber, int pageQuantity);
         Task AddAsync(EmployeeModel model);
-        Task<EmployeeModel?> GetByIdAsync(int id);
+        Task<EmployeeDTO?> GetByIdAsync(int id);
     }
 }

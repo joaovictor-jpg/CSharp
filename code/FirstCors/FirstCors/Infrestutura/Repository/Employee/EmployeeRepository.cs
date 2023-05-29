@@ -1,4 +1,5 @@
-﻿using FirstCors.Domain.DTOs;
+﻿using AutoMapper;
+using FirstCors.Domain.DTOs;
 using FirstCors.Domain.Model;
 using FirstCors.Infrestutura.Data;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,12 @@ namespace FirstCors.Infrestutura.Repository.Employee
     public class EmployeeRepository : IEmployee
     {
         private readonly CorsContext _corsContext;
+        private readonly IMapper _mapper;
 
-        public EmployeeRepository(CorsContext corsContext)
+        public EmployeeRepository(CorsContext corsContext, IMapper mapper)
         {
             _corsContext = corsContext;
+            _mapper = mapper;
         }
         public async Task<List<EmployeeDTO>> GeatAllAsync(int pageNumber, int pageQuantity)
         {
@@ -22,15 +25,19 @@ namespace FirstCors.Infrestutura.Repository.Employee
                 .Select(e => new EmployeeDTO
                 {
                     Id = e.Id,
-                    Name = e.Name,
+                    NameEmployee = e.Name,
                     Photo = e.Photo
                 })
                 .ToListAsync();
         }
 
-        public async Task<EmployeeModel?> GetByIdAsync(int id)
+        public async Task<EmployeeDTO?> GetByIdAsync(int id)
         {
-            return await _corsContext.employee.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var employee = await _corsContext.employee.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            var employeeDTO = _mapper.Map<EmployeeDTO>(employee);
+
+            return employeeDTO;
         }
 
         public async Task AddAsync(EmployeeModel model)
