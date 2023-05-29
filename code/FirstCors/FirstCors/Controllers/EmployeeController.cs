@@ -12,10 +12,12 @@ namespace FirstCors.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployee _employee;
+        private readonly ILogger<EmployeeController> _logger;
 
-        public EmployeeController(IEmployee employee)
+        public EmployeeController(IEmployee employee, ILogger<EmployeeController> logger)
         {
             _employee =  employee ?? throw new ArgumentNullException(nameof(employee));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet("{pageNumber}/{pageQuantity}")]
@@ -25,7 +27,12 @@ namespace FirstCors.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllAsync([FromRoute]int pageNumber = 0, [FromRoute] int pageQuantity = 5)
         {
+            _logger.Log(LogLevel.Error, "Teve um erro");
+
             var emplyoee = await _employee.GeatAllAsync(pageNumber,pageQuantity);
+
+            _logger.LogInformation("Teste");
+
             return emplyoee == null ? NotFound() : Ok(emplyoee);
         }
 
