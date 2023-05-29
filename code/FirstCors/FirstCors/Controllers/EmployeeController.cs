@@ -18,14 +18,14 @@ namespace FirstCors.Controllers
             _employee =  employee ?? throw new ArgumentNullException(nameof(employee));
         }
 
-        [HttpGet]
+        [HttpGet("{pageNumber}/{pageQuantity}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync([FromRoute]int pageNumber = 0, [FromRoute] int pageQuantity = 5)
         {
-            var emplyoee = await _employee.GeatAllAsync();
+            var emplyoee = await _employee.GeatAllAsync(pageNumber,pageQuantity);
             return emplyoee == null ? NotFound() : Ok(emplyoee);
         }
 

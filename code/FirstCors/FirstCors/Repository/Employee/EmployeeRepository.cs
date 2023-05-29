@@ -12,10 +12,12 @@ namespace FirstCors.Repository.Employee
         {
             _corsContext = corsContext;
         }
-        public async Task<List<EmployeeModel>> GeatAllAsync()
+        public async Task<List<EmployeeModel>> GeatAllAsync(int pageNumber, int pageQuantity)
         {
             return await _corsContext.employee
                 .AsNoTracking()
+                .Skip(pageNumber)
+                .Take(pageQuantity)
                 .ToListAsync();
         }
 
