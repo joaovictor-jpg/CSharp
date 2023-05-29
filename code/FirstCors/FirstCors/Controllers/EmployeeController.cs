@@ -1,6 +1,7 @@
 ﻿using FirstCors.Model;
 using FirstCors.Repository.Employee;
 using FirstCors.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,8 +30,10 @@ namespace FirstCors.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddAsync([FromForm] EmployeeView employeeView)
         {
@@ -51,6 +54,11 @@ namespace FirstCors.Controllers
         }
 
         [HttpPost("/download/{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DownloadPhoto([FromRoute] int id)
         {
             var employee = await _employee.GetByIdAsync(id);
