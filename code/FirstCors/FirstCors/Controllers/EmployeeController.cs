@@ -29,6 +29,8 @@ namespace FirstCors.Controllers
         {
             _logger.Log(LogLevel.Error, "Teve um erro");
 
+            // throw new Exception("teste");
+
             var emplyoee = await _employee.GeatAllAsync(pageNumber,pageQuantity);
 
             _logger.LogInformation("Teste");
