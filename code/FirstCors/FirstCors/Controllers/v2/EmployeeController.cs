@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FirstCors.Controllers
+namespace FirstCors.Controllers.v2
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("2.0")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployee _employee;
@@ -16,7 +17,7 @@ namespace FirstCors.Controllers
 
         public EmployeeController(IEmployee employee, ILogger<EmployeeController> logger)
         {
-            _employee =  employee ?? throw new ArgumentNullException(nameof(employee));
+            _employee = employee ?? throw new ArgumentNullException(nameof(employee));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -25,13 +26,13 @@ namespace FirstCors.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllAsync([FromRoute]int pageNumber = 0, [FromRoute] int pageQuantity = 5)
+        public async Task<IActionResult> GetAllAsync([FromRoute] int pageNumber = 0, [FromRoute] int pageQuantity = 5)
         {
             _logger.Log(LogLevel.Error, "Teve um erro");
 
             // throw new Exception("teste");
 
-            var emplyoee = await _employee.GeatAllAsync(pageNumber,pageQuantity);
+            var emplyoee = await _employee.GeatAllAsync(pageNumber, pageQuantity);
 
             _logger.LogInformation("Teste");
 
@@ -86,7 +87,7 @@ namespace FirstCors.Controllers
         {
             var employee = await _employee.GetByIdAsync(id);
 
-            if(employee == null) return NotFound("Employee not found");
+            if (employee == null) return NotFound("Employee not found");
 
             if (employee.Photo == null) return NotFound("employee does not have a photo");
 
