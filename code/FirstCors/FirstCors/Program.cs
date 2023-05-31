@@ -86,6 +86,14 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 var versionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 // Configure the HTTP request pipeline.
@@ -106,6 +114,8 @@ else
 {
     app.UseExceptionHandler("/error");
 }
+
+app.UseCors("MyPolicy");
 
 app.UseHttpsRedirection();
 
