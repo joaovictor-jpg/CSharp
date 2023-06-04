@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entitites.Entities
 {
     [Table("TB_MESSAGE")]
-    internal class Message : Notifies
+    public class Message : Notifies
     {
         [Column("MSN_ID")]
         public int Id { get; set; }
