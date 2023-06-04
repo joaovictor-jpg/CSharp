@@ -3,7 +3,7 @@ using Domain.Interfaces.InterfaceServices;
 
 namespace Domain.Services
 {
-    internal class ServiceMessage : IServiceMessage
+    public class ServiceMessage : IServiceMessage
     {
         private readonly IMessage _message;
 

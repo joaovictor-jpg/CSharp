@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrascture.Repository.Repositories
 {
-    internal class RepositoryMessage : RepositoryGenerecs<Message>, IMessage
+    public class RepositoryMessage : RepositoryGenerecs<Message>, IMessage
     {
 
         private readonly DbContextOptions<ContextBase> _OptionBuilder;
