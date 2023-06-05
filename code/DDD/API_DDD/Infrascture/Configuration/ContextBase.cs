@@ -28,7 +28,7 @@ namespace Infrascture.Configuration
 
         public string ObterStringConexao()
         {
-            return "Server=localhost;initial catalog=DB_API_DDD;Integrated Security=False;uid=root;pwd=System256715;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+            return "Server=localhost;initial catalog=DB_API_DDD;uid=root;pwd=System256715;Connect Timeout=15";
         }
     }
 }
