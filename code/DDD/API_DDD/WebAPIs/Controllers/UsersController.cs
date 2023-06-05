@@ -52,11 +52,7 @@ namespace WebAPIs.Controllers
                     .AddExpiry(5)
                     .Builder();
 
-                return Ok(new
-                {
-                    success = true,
-                    token = token.value
-                });
+                return Ok(token.value);
             }
             else
             {
