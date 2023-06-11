@@ -80,7 +80,8 @@ namespace WebAPIs.Controllers
             return messageMap;
         }
 
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
         [Produces("Application/json")]
         [HttpGet("/api/Get")]
         public async Task<List<MessageViewModel>> ListAsync()

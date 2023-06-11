@@ -56,6 +56,7 @@ builder.Services.AddDbContext<ContextBase>(x => x.UseMySql(
                     builder.Configuration.GetConnectionString("DataBase"),
                     ServerVersion.Parse("8.0.28")
                 ));
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
 builder.Services.AddControllersWithViews();
@@ -125,7 +126,8 @@ if (app.Environment.IsDevelopment())
 
 //app.UseCors(b => b.WithOrigins(urlDev, urlHML, urlPROD));
 
-var devClient = "http://localhost:4200";
+//var devClient = "http://localhost:4200";
+var devClient = "http://localhost:3000";
 app.UseCors(x => x
 .AllowAnyOrigin()
 .AllowAnyMethod()
