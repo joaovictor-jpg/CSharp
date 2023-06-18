@@ -1,22 +1,38 @@
 ﻿using Domain.Interfaces.IUsuarioSistemaFinanceiro;
 using Entities.Entities;
+using Infra.Config;
 using Infra.Repository.Generics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository
 {
     public class UsuarioSistemaFinanceiroRepository : RepositoryGenerics<UserFinancialSystem>, InterfaceUsuarioSistemaFinanceiro
     {
-        public Task<IList<UserFinancialSystem>> ListarUsuariosSistema(int IdSistema)
+
+        private readonly DbContextOptions<ContextBase> _optionsBuilder;
+
+        public UsuarioSistemaFinanceiroRepository()
         {
-            throw new NotImplementedException();
+            _optionsBuilder = new DbContextOptions<ContextBase>();
         }
 
-        public Task<UserFinancialSystem> ObterUsuarioPorEmail(string emailUsuario)
+        public async Task<IList<UserFinancialSystem>> ListarUsuariosSistema(int IdSistema)
         {
-            throw new NotImplementedException();
+            using(var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.UserFinancialSystems.Where(u => u.IdSystem == IdSistema).AsNoTracking().ToListAsync();
+            }
         }
 
-        public Task RemoverUsuarios(List<UserFinancialSystem> usuarios)
+        public async Task<UserFinancialSystem> ObterUsuarioPorEmail(string emailUsuario)
+        {
+            using(var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.UserFinancialSystems.AsNoTracking().FirstOrDefaultAsync(u => u.EmailUser.Equals(emailUsuario));
+            }
+        }
+
+        public async Task RemoverUsuarios(List<UserFinancialSystem> usuarios)
         {
             throw new NotImplementedException();
         }

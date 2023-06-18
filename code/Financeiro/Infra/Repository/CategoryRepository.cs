@@ -1,14 +1,33 @@
 ﻿using Domain.Interfaces.ICategory;
 using Entities.Entities;
+using Infra.Config;
 using Infra.Repository.Generics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository
 {
     public class CategoryRepository : RepositoryGenerics<Category>, InterfaceCategory
     {
-        public Task<IList<Category>> ListarCategoriaUsuarios(string email)
+
+        private readonly DbContextOptions<ContextBase> _optionsBuilder;
+
+        public CategoryRepository()
         {
-            throw new NotImplementedException();
+            _optionsBuilder = new DbContextOptions<ContextBase>();
+        }
+
+        public async Task<IList<Category>> ListarCategoriaUsuarios(string email)
+        {
+            using(var banco = new ContextBase(_optionsBuilder))
+            {
+                return await (
+                        from s in banco.FinancialSystems
+                        join c in banco.Categories on s.Id equals c.IdSystem
+                        join us in banco.UserFinancialSystems on s.Id equals us.IdSystem
+                        where us.EmailUser.Equals(email) && us.SystemCurrent
+                        select c
+                    ).AsNoTracking().ToListAsync();
+            }
         }
     }
 }

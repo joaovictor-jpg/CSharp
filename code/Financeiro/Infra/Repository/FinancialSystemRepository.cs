@@ -1,14 +1,32 @@
 ﻿using Domain.Interfaces.IFinancialSystem;
 using Entities.Entities;
+using Infra.Config;
 using Infra.Repository.Generics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository
 {
     public class FinancialSystemRepository : RepositoryGenerics<FinancialSystem>, InterfaceFinancialSistem
     {
-        public Task<IList<FinancialSystem>> ListaSistemasUsuario(string emailUsuario)
+
+        private readonly DbContextOptions<ContextBase> _optionsBuilder;
+
+        public FinancialSystemRepository()
         {
-            throw new NotImplementedException();
+            _optionsBuilder = new DbContextOptions<ContextBase>();
+        }
+
+        public async Task<IList<FinancialSystem>> ListaSistemasUsuario(string emailUsuario)
+        {
+            using(var banco = new ContextBase(_optionsBuilder))
+            {
+                return await (
+                        from s in banco.FinancialSystems
+                        join us in banco.UserFinancialSystems on s.Id equals us.IdSystem
+                        where us.EmailUser.Equals(emailUsuario)
+                        select s
+                    ).AsNoTracking().ToListAsync();
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace Entities.Entities
 {
     [Table("FinancialSystem")]
-    public class FinancialSystem
+    public class FinancialSystem : Base
     {
         public int Month { get; set; }
         public int Year { get; set; }
