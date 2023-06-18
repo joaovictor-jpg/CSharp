@@ -34,7 +34,12 @@ namespace Infra.Repository
 
         public async Task RemoverUsuarios(List<UserFinancialSystem> usuarios)
         {
-            throw new NotImplementedException();
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                banco.UserFinancialSystems.RemoveRange(usuarios);
+
+                await banco.SaveChangesAsync();
+            }
         }
     }
 }
