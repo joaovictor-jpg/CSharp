@@ -27,14 +27,21 @@ namespace Infra.Config
         {
             //return "Data Source=NBQSP-FC693;Initial Catalog=FINANCEIRO;Integrated Security=False;User ID=sa;Password=1234;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
 
-            return "Data Source=NBQSP-FC693;Initial Catalog=FINANCEIRO;Integrated Security=True"; // Evitar
+            //return "Data Source=NBQSP-FC693;Initial Catalog=FINANCEIRO;Integrated Security=True"; // Evitar
+
+            return "Server=localhost;initial catalog=FINANCEIRO;uid=root;pwd=System256715;Connect Timeout=15";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if(!optionsBuilder.IsConfigured)
+            /* if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(ObterStringConexao());
+                base.OnConfiguring(optionsBuilder);
+            } */
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql(ObterStringConexao(), ServerVersion.Parse("8.0.28"));
                 base.OnConfiguring(optionsBuilder);
             }
         }
