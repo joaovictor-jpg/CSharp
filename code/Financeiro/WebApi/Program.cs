@@ -23,14 +23,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-/*builder.Services.AddDbContext<ContextBase>(options =>
+builder.Services.AddDbContext<ContextBase>(options =>
                options.UseSqlServer(
-                   builder.Configuration.GetConnectionString("DefaultConnection")));*/
+                   builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<ContextBase>(x => x.UseMySql(
+/*builder.Services.AddDbContext<ContextBase>(x => x.UseMySql(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
                     ServerVersion.Parse("8.0.28")
-                ));
+                ));*/
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
