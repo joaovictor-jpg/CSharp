@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.Generics;
 using Infra.Config;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.Win32.SafeHandles;
 using System.Data.Entity;
 using System.Runtime.InteropServices;
@@ -21,7 +22,9 @@ namespace Infra.Repository.Generics
             using (var data = new ContextBase(_optionsBuilder))
             {
                 await data.Set<T>().AddAsync(Object);
-                await data.SaveChangesAsync();
+                int n = await data.SaveChangesAsync();
+
+                Console.WriteLine(n);
             }
         }
 
@@ -29,12 +32,12 @@ namespace Infra.Repository.Generics
         {
             using (var data = new ContextBase(_optionsBuilder))
             {
-                await data.Set<T>().AddAsync(Object);
+                data.Set<T>().Remove(Object);
                 await data.SaveChangesAsync();
             }
         }
 
-        public async Task<T> GetEntityById(string Id)
+        public async Task<T> GetEntityById(int Id)
         {
             using (var data = new ContextBase(_optionsBuilder))
             {

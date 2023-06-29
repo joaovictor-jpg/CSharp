@@ -20,7 +20,7 @@ namespace Infra.Repository
         {
             using(var banco = new ContextBase(_optionsBuilder))
             {
-                return await banco.UserFinancialSystems.Where(u => u.IdSystem == IdSistema).AsNoTracking().ToListAsync();
+                return await banco.UserFinancialSystem.Where(u => u.IdSystem == IdSistema).AsNoTracking().ToListAsync();
             }
         }
 
@@ -28,7 +28,7 @@ namespace Infra.Repository
         {
             using(var banco = new ContextBase(_optionsBuilder))
             {
-                return await banco.UserFinancialSystems.AsNoTracking().FirstOrDefaultAsync(u => u.EmailUser.Equals(emailUsuario));
+                return await banco.UserFinancialSystem.AsNoTracking().FirstOrDefaultAsync(u => u.EmailUser.Equals(emailUsuario));
             }
         }
 
@@ -36,7 +36,7 @@ namespace Infra.Repository
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
-                banco.UserFinancialSystems.RemoveRange(usuarios);
+                banco.UserFinancialSystem.RemoveRange(usuarios);
 
                 await banco.SaveChangesAsync();
             }

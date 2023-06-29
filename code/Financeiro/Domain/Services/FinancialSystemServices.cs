@@ -31,6 +31,7 @@ namespace Domain.Services
 
                 await _interfaceFinancialSistem.Add(financialSystem);
             }
+            Console.WriteLine("teste ele passou aqui");
         }
 
         public async Task AtualizarFinancialSystem(FinancialSystem financialSystem)

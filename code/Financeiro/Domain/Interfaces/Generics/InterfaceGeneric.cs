@@ -5,7 +5,7 @@
         Task Add(T Object);
         Task Update (T Object);
         Task Delete(T Object);
-        Task<T> GetEntityById(string Id);
+        Task<T> GetEntityById(int Id);
         Task<List<T>> List();
     }
 }
