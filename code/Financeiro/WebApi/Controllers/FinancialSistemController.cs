@@ -55,16 +55,16 @@ namespace WebApi.Controllers
             return Task.FromResult(financialSystem);
         }
 
-        [HttpGet("/api/GetEntityById")]
+        [HttpGet("/api/GetFinancialSistemById")]
         [Produces("application/json")]
-        public async Task<object> GetEntityById(int id)
+        public async Task<object> GetFinancialSistemById(int id)
         {
             return await _interfaceFinancialSistem.GetEntityById(id);
         }
 
-        [HttpDelete("/api/Delete")]
+        [HttpDelete("/api/DeleteFinancialSystem")]
         [Produces("application/json")]
-        public async Task<object> Delete(int id)
+        public async Task<object> DeleteFinancialSystem(int id)
         {
             try
             {

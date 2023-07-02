@@ -6,5 +6,7 @@ namespace Domain.Interfaces.InterfaceService
     {
         Task AdicionarExpense(Expense expense);
         Task AtualizarExpense(Expense expense);
+
+        Task<object> CarregaGraficos(string emailUser);
     }
 }

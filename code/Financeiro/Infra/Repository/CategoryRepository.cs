@@ -22,7 +22,7 @@ namespace Infra.Repository
             {
                 return await (
                         from s in banco.FinancialSystem
-                        join c in banco.Categorie on s.Id equals c.IdSystem
+                        join c in banco.Category on s.Id equals c.IdSystem
                         join us in banco.UserFinancialSystem on s.Id equals us.IdSystem
                         where us.EmailUser.Equals(email) && us.SystemCurrent
                         select c

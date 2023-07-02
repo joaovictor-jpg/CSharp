@@ -9,7 +9,7 @@ namespace Infra.Config
 
         public DbSet<FinancialSystem> FinancialSystem { get; set; }
         public DbSet<UserFinancialSystem> UserFinancialSystem { get; set; }
-        public DbSet<Category> Categorie { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<Expense> Expense { get; set; }
 
         public ContextBase( DbContextOptions options ) : base(options)

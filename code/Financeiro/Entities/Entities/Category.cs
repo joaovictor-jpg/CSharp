@@ -8,6 +8,6 @@ namespace Entities.Entities
         [ForeignKey("FinancialSystem")]
         [Column(Order = 1)]
         public int IdSystem { get; set; }
-        public virtual FinancialSystem FinancialSystem { get; set; }
+        // public virtual FinancialSystem FinancialSystem { get; set; }
     }
 }

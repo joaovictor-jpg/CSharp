@@ -21,13 +21,12 @@ namespace Infra.Repository
             using(var banco = new ContextBase(_optionsBuilder))
             {
                 return await (
-                        from s in banco.FinancialSystem
-                        join c in banco.Categorie on s.Id equals c.IdSystem
-                        join us in banco.UserFinancialSystem on s.Id equals us.IdSystem
-                        join d in banco.Expense on c.Id equals d.IdCategory
-                        where us.EmailUser.Equals(emailUsuario) && s.Month == d.Month && s.Year == d.Year
-                        select d
-                    ).AsTracking().ToListAsync();
+                            from s in banco.FinancialSystem
+                            join c in banco.Category on s.Id equals c.IdSystem
+                            join us in banco.UserFinancialSystem on s.Id equals us.IdSystem
+                            join d in banco.Expense on c.Id equals d.IdCategory
+                            where us.EmailUser.Equals(emailUsuario) && s.Month == d.Month && s.Year == d.Year
+                            select d).AsNoTracking().ToListAsync();
             }
         }
 
@@ -37,7 +36,7 @@ namespace Infra.Repository
             {
                 return await(
                         from s in banco.FinancialSystem
-                        join c in banco.Categorie on s.Id equals c.IdSystem
+                        join c in banco.Category on s.Id equals c.IdSystem
                         join us in banco.UserFinancialSystem on s.Id equals us.IdSystem
                         join d in banco.Expense on c.Id equals d.IdCategory
                         where us.EmailUser.Equals(emailUsuario) && d.Month < DateTime.Now.Month && !d.PaidOut
