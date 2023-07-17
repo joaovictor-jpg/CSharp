@@ -9,7 +9,10 @@
   <ItemGroup>
     <Folder Include="Entitys\" />
     <Folder Include="Enums\" />
-    <Folder Include="Notification\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.9" />
   </ItemGroup>
 
 </Project>
