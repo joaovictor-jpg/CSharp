@@ -45,7 +45,7 @@ namespace SevenconsutBack.Controllers
             if (client == null) return NotFound("client not found");
 
             client.Name = clientNew.Name;
-            client.Email = clientNew.Email;
+            client.DataAtualizacao = DateTime.Now;
 
             return Ok(new
             {
