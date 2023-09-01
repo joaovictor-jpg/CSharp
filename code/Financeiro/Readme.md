@@ -10,6 +10,10 @@ Este projeto tem como objetivo gerenciar os gastos financeiros de uma pessoa fí
 
 ## Detalhe da arquitetura
 O **DDD** (Domain Driven Design) é uma modelagem de software cujo objetivo é facilitar a implementação de regras e processos complexos, onde visa a divisão de responsabilidade por camadas e é independente da tecnologia Utilizada. Ou seja, o **DDD** é uma filosofia voltada para o domínio do negócio
+* Dominio (Serviço, validações e regras)
+* Infra (Camada responsável por execução no banco de dados)
+* Helpers (Camada de métodos de auxilio como os **Singleton** compartilados)
+* WebApis (Camada de hospedagem das Apis disponíveis para o front-end)
 
 ## Detalhe técnicos
 * Identity Microsoft: Gerenciamento de usuário
